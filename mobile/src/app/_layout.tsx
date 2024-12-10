@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/rubik'
 
 import { colors } from '@/styles/theme'
+import { Loading } from '@/components/loading'
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -18,7 +19,7 @@ export default function RootLayout() {
   })
 
   if (!fontsLoaded) {
-    return null
+    return <Loading />
   }
 
   return (
