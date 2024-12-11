@@ -15,21 +15,23 @@ export function Categories({
   onCategorySelect,
 }: CategoriesProps) {
   return (
-    <FlatList
-      data={data}
-      keyExtractor={item => item.id}
-      renderItem={({ item }) => (
-        <Category
-          iconId={item.id}
-          name={item.name}
-          isSelected={item.id === selectedCategoryId}
-          onPress={() => onCategorySelect(item.id)}
-        />
-      )}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      style={s.container}
-      contentContainerStyle={s.content}
-    />
+    <View>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <Category
+            iconId={item.id}
+            name={item.name}
+            isSelected={item.id === selectedCategoryId}
+            onPress={() => onCategorySelect(item.id)}
+          />
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={s.container}
+        contentContainerStyle={s.content}
+      />
+    </View>
   )
 }
