@@ -2,6 +2,7 @@ import { View } from 'react-native'
 
 import { Steps } from '@/components/steps'
 import { Welcome } from '@/components/welcome'
+import { Button } from '@/components/button'
 
 export default function Index() {
   return (
@@ -9,6 +10,10 @@ export default function Index() {
       <Welcome />
 
       <Steps />
+
+      <Button>
+        <Button.Title>Começar</Button.Title>
+      </Button>
     </View>
   )
 }
