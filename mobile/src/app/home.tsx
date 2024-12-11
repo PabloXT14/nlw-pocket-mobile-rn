@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Alert, View } from 'react-native'
 import MapView from 'react-native-maps'
+import * as Location from 'expo-location'
 
 import type { CategoryDTO } from '@/@types/category'
 import type { PlaceDTO } from '@/@types/place'
@@ -50,7 +51,28 @@ export default function Home() {
     }
   }
 
+  async function getCurrentLocation() {
+    try {
+      const { granted } = await Location.requestForegroundPermissionsAsync()
+
+      if (!granted) {
+        return
+      }
+
+      const location = await Location.getCurrentPositionAsync()
+
+      console.log('LOCATION: ', location)
+    } catch (error) {
+      console.log(error)
+      Alert.alert(
+        'Localização',
+        'Não foi possível carregar a sua localização atual.'
+      )
+    }
+  }
+
   useEffect(() => {
+    // getCurrentLocation()
     fetchCategories()
   }, [])
 
