@@ -112,6 +112,7 @@ export default function Market() {
         <Cover uri={market.cover} />
 
         <Details data={market} />
+
         {coupon && <Coupon code={coupon} />}
       </ScrollView>
 

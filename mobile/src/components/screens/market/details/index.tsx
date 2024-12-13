@@ -2,9 +2,10 @@ import { View, Text } from 'react-native'
 import { IconPhone, IconMapPin, IconTicket } from '@tabler/icons-react-native'
 
 import type { PlaceDTO } from '@/@types/place'
-
-import { s } from './styles'
 import { Info } from '../info'
+
+import { colors } from '@/styles/colors'
+import { s } from './styles'
 
 type DetailsProps = {
   data: Pick<
@@ -20,13 +21,20 @@ export function Details({ data }: DetailsProps) {
 
       <Text style={s.description}>{data.description}</Text>
 
+      <View style={[s.couponsCard, data.coupons <= 0 && s.couponCardEmpty]}>
+        <IconTicket
+          size={24}
+          color={data.coupons <= 0 ? colors.gray[400] : colors.red.base}
+        />
+
+        <Text style={s.couponsTitle}>
+          <Text style={s.couponsAmount}>{data.coupons}</Text> cupons disponíveis
+        </Text>
+      </View>
+
       <View style={s.group}>
         <Text style={s.title}>Informações</Text>
 
-        <Info
-          icon={IconTicket}
-          description={`${data.coupons} cupons disponíveis`}
-        />
         <Info icon={IconMapPin} description={data.address} />
         <Info icon={IconPhone} description={data.phone} />
       </View>
