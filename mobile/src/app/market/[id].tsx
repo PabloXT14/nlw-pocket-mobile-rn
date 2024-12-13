@@ -6,6 +6,7 @@ import { getMarketById } from '@/http/get-market-by-id'
 import type { PlaceDTO } from '@/@types/place'
 
 import { Loading } from '@/components/loading'
+import { Cover } from '@/components/screens/market/cover'
 
 export default function Market() {
   const params = useLocalSearchParams<{ id: string }>()
@@ -39,8 +40,8 @@ export default function Market() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>{market.name}</Text>
+    <View style={{ flex: 1 }}>
+      <Cover uri={market.cover} />
     </View>
   )
 }
