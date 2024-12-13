@@ -116,7 +116,7 @@ export default function Market() {
       </ScrollView>
 
       <View style={{ padding: 32 }}>
-        {coupon ? (
+        {coupon || market.coupons <= 0 ? (
           <Button onPress={() => router.back()}>
             <Button.Title>Voltar</Button.Title>
           </Button>

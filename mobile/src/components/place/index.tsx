@@ -29,7 +29,10 @@ export function Place({ data, ...props }: PlaceProps) {
         </Text>
 
         <View style={s.footer}>
-          <IconTicket size={16} color={colors.red.base} />
+          <IconTicket
+            size={16}
+            color={data.coupons > 0 ? colors.red.base : colors.gray[400]}
+          />
           <Text style={s.tickets}>{data.coupons} cupons disponíveis</Text>
         </View>
       </View>
