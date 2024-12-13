@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Alert, Text, View } from 'react-native'
-import { router, useLocalSearchParams } from 'expo-router'
+import { Alert, View } from 'react-native'
+import { router, useLocalSearchParams, Redirect } from 'expo-router'
 
 import { getMarketById } from '@/http/get-market-by-id'
 import type { PlaceDTO } from '@/@types/place'
 
 import { Loading } from '@/components/loading'
 import { Cover } from '@/components/screens/market/cover'
+import { Details } from '@/components/screens/market/details'
+import { Coupon } from '@/components/screens/market/coupon'
 
 export default function Market() {
   const params = useLocalSearchParams<{ id: string }>()
@@ -17,8 +19,6 @@ export default function Market() {
   async function fetchMarket() {
     try {
       const market = await getMarketById({ id: params.id })
-
-      console.log('MARKET: ', market)
 
       setMarket(market)
     } catch (error) {
@@ -35,13 +35,21 @@ export default function Market() {
     fetchMarket()
   }, [params.id])
 
-  if (!market || isLoading) {
+  if (isLoading) {
     return <Loading />
+  }
+
+  if (!market) {
+    return <Redirect href="/home" />
   }
 
   return (
     <View style={{ flex: 1 }}>
       <Cover uri={market.cover} />
+
+      <Details data={market} />
+
+      <Coupon code="FM4345T6" />
     </View>
   )
 }

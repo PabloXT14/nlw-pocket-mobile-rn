@@ -5,8 +5,12 @@ export type PlaceDTO = {
   description: string
   coupons: number
   cover: string
-  address: number
+  address: string
   phone: string
   latitude: number
   longitude: number
+  rules: {
+    id: string
+    description: string
+  }[]
 }
