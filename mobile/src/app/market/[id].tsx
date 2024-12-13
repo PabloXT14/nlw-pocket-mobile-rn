@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Alert, Modal, View } from 'react-native'
+import { Alert, Modal, View, StatusBar } from 'react-native'
 import { router, useLocalSearchParams, Redirect } from 'expo-router'
 import { useCameraPermissions, CameraView } from 'expo-camera'
 
@@ -106,6 +106,8 @@ export default function Market() {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" hidden={isCameraModalVisible} />
+
       <Cover uri={market.cover} />
 
       <Details data={market} />
