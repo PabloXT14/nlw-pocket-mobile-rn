@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 import MapView, { Callout, Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
+import { router } from 'expo-router'
 
 import type { CategoryDTO } from '@/@types/category'
 import type { PlaceDTO } from '@/@types/place'
@@ -125,7 +126,7 @@ export default function Home() {
             }}
             image={pinIcon}
           >
-            <Callout>
+            <Callout onPress={() => router.navigate(`/market/${market.id}`)}>
               <View>
                 <Text
                   style={{
