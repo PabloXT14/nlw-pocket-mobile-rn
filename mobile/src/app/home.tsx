@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 import MapView, { Callout, Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
@@ -26,6 +26,8 @@ export default function Home() {
   const [selectedCategoryId, setSelectedCategoryId] = useState('')
 
   const [markets, setMarkets] = useState<PlaceDTO[]>([])
+
+  const mapViewRef = useRef<MapView>(null)
 
   async function fetchCategories() {
     try {
@@ -76,9 +78,23 @@ export default function Home() {
     }
   }
 
+  function setMapInitialPosition() {
+    if (!mapViewRef.current) return
+
+    mapViewRef.current.animateCamera({
+      center: {
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
+      },
+      zoom: 17,
+    })
+  }
+
   useEffect(() => {
     // getCurrentLocation()
     fetchCategories()
+
+    setMapInitialPosition()
   }, [])
 
   useFocusEffect(
@@ -96,7 +112,7 @@ export default function Home() {
       />
 
       <MapView
-        key={`${Date.now()}`}
+        ref={mapViewRef}
         style={{ flex: 1 }}
         initialRegion={{
           latitude: currentLocation.latitude,
@@ -104,9 +120,6 @@ export default function Home() {
           latitudeDelta: 0.01, // aproximação/zoom
           longitudeDelta: 0.01,
         }}
-        showsMyLocationButton
-        rotateEnabled={false}
-        mapType="standard"
       >
         {/* currentLocation */}
         <Marker

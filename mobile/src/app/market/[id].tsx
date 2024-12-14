@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Alert, Modal, View, StatusBar, ScrollView } from 'react-native'
 import { router, useLocalSearchParams, Redirect } from 'expo-router'
 import { useCameraPermissions, CameraView } from 'expo-camera'
+import { IconScan } from '@tabler/icons-react-native'
 
 import { getMarketById } from '@/http/get-market-by-id'
 import type { PlaceDTO } from '@/@types/place'
@@ -123,6 +124,7 @@ export default function Market() {
           </Button>
         ) : (
           <Button onPress={handleOpenCamera}>
+            <Button.Icon icon={IconScan} />
             <Button.Title>Ler QR Code</Button.Title>
           </Button>
         )}
