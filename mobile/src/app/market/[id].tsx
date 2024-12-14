@@ -105,6 +105,8 @@ export default function Market() {
     return <Redirect href="/home" />
   }
 
+  // console.log(params.id)
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" hidden={isCameraModalVisible} />
